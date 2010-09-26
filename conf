@@ -1,26 +1,33 @@
 #!/bin/bash -ex
 
-# Special repository for php-fpm
-add-apt-repository ppa:brianmercer/php
-
-apt-get update
-
-HOSTNAME=NGINX
+install()
+{
+	apt-get update
+	DEBIAN_FRONTEND=noninteractive apt-get -y \
+		-o DPkg::Options::=--force-confdef \
+		-o DPkg::Options::=--force-confold \
+		install $@
+}
 
 # set hostname
+HOSTNAME=NGINX
 echo "$HOSTNAME" > /etc/hostname
 sed -i "s|127.0.1.1 \(.*\)|127.0.1.1 $HOSTNAME|" /etc/hosts
 
 /etc/init.d/hostname stop
 /etc/init.d/hostname start
 
-DEBIAN_FRONTEND=noninteractive apt-get -y \
-    -o DPkg::Options::=--force-confdef \
-    -o DPkg::Options::=--force-confold \
-    install apt-utils openssl ssl-cert libsasl2-modules mcrypt nginx mysql-server mysql-client dbconfig-common phpmyadmin memcached php5 php5-common php5-suhosin php-apc php5-mysql php5-memcached php5-curl php5-gd php5-mcrypt php-pear php5-fpm postfix webmin-postfix
+# install packages
+install apt-utils openssl ssl-cert libsasl2-modules mcrypt nginx mysql-server mysql-client dbconfig-common phpmyadmin memcached php5 php5-common php5-suhosin php-apc php5-mysql php5-memcached php5-curl php5-gd php5-mcrypt php-pear postfix webmin-postfix python-software-properties
 
-ln -s /usr/local/nginx/sites-available/phpmyadmin /usr/local/nginx/sits-enabled/phpmyadmin
+# Special repository for php-fpm
+add-apt-repository ppa:brianmercer/php
+install php5-fpm
 
+# enable phpmyadmin
+ln -s /etc/nginx/sites-available/phpmyadmin /etc/nginx/sits-enabled/phpmyadmin
+
+# restart nginx service
 /etc/init.d/nginx restart
 
 apt-get clean

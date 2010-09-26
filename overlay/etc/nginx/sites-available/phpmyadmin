@@ -1,6 +1,10 @@
 server {
     listen 12322;
 
+    # ssl    on;
+    # ssl_certificate         /etc/ssl/certs/myssl.crt;
+    # ssl_certificate_key  /etc/ssl/private/myssl.key;
+
     location / {
          root /usr/share/phpmyadmin;
          index index.php;
