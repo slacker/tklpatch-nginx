@@ -6,7 +6,7 @@
         <meta http-equiv="Content-Style-Type" content="text/css">
         <meta http-equiv="Content-Script-Type" content="text/javascript">
 
-        <title>TurnKey LAMP</title>
+        <title>TurnKey NGINX</title>
         
         <link rel="stylesheet" href="css/ui.tabs.css" type="text/css" media="print, projection, screen">
         <link rel="stylesheet" href="css/base.css" type="text/css">
