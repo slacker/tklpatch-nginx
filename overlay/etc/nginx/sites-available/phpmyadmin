@@ -1,9 +1,9 @@
 server {
     listen 12322;
 
-    # ssl    on;
-    # ssl_certificate         /etc/ssl/certs/myssl.crt;
-    # ssl_certificate_key  /etc/ssl/private/myssl.key;
+    ssl    on;
+    ssl_certificate         /etc/ssl/certs/cert.pem;
+    ssl_certificate_key  /etc/ssl/certs/cert.pem;
 
     location / {
          root /usr/share/phpmyadmin;
