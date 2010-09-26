@@ -10,12 +10,11 @@ install()
 }
 
 # set hostname
-HOSTNAME=NGINX
+HOSTNAME=nginx
 echo "$HOSTNAME" > /etc/hostname
 sed -i "s|127.0.1.1 \(.*\)|127.0.1.1 $HOSTNAME|" /etc/hosts
+hostname nginx
 
-service hostname stop
-service hostname start
 
 # Install dependency for add-apt-repository
 install python-software-properties
