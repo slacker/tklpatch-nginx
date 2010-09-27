@@ -2,6 +2,7 @@ You may access this $hostname appliance over the
 network using the following methods:
 
 Web:        http://$ipaddr
+            https://$ipaddr
 Web shell:  https://$ipaddr:12320
 Webmin:     https://$ipaddr:12321
 PHPMyAdmin  https://$ipaddr:12322

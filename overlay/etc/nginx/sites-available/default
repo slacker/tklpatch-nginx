@@ -1,12 +1,12 @@
-# Modified Turnkey Linux default config file
+# Modified Turnkey Linux default host config file
 server {
 
-	listen   80; ## listen for ipv4
-	listen   [::]:80 default ipv6only=on; ## listen for ipv6
+	listen 80 default;
 
-	server_name  localhost;
+	server_name  nginx;
 
-	access_log  /var/log/nginx/localhost.access.log;
+	access_log  /var/log/nginx/default.access.log;
+	error_log   /var/log/nginx/default.error.log;
 
 	location / {
 		root   /var/www;
@@ -20,15 +20,33 @@ server {
 		fastcgi_index  index.php;
 		fastcgi_param  SCRIPT_FILENAME  /var/www$fastcgi_script_name;
 		include fastcgi_params;
-		fastcgi_intercept_errors        on;
-		fastcgi_ignore_client_abort     off;
-		fastcgi_connect_timeout 60;
-		fastcgi_send_timeout 180;
-		fastcgi_read_timeout 180;
-		fastcgi_buffer_size 128k;
-		fastcgi_buffers 4 256k;
-		fastcgi_busy_buffers_size 256k;
-		fastcgi_temp_file_write_size 256k;
-	#root /var/www;
+	}
+}
+
+server {
+
+	listen 443;
+
+	server_name  nginx;
+
+    ssl    on;
+    ssl_certificate      /etc/ssl/certs/cert.pem;
+    ssl_certificate_key  /etc/ssl/certs/cert.pem;
+
+	access_log  /var/log/nginx/default.access.log;
+	error_log   /var/log/nginx/default.error.log;
+
+	location / {
+		root   /var/www;
+		index  index.html index.htm index.php;
+	}
+
+	# Parse all .php file in the /var/www directory
+		location ~ \.php$ {
+		fastcgi_split_path_info ^(.+\.php)(.*)$;
+		fastcgi_pass   127.0.0.1:9000;
+		fastcgi_index  index.php;
+		fastcgi_param  SCRIPT_FILENAME  /var/www$fastcgi_script_name;
+		include fastcgi_params;
 	}
 }
