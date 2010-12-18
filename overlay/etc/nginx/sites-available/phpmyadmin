@@ -1,24 +1,9 @@
-server {
-    listen 12322;
-
+server
+{
+	listen       12322;
 	server_name  nginx;
-
-    ssl    on;
-    ssl_certificate      /etc/ssl/certs/cert.pem;
-    ssl_certificate_key  /etc/ssl/certs/cert.pem;
-
-    access_log  /var/log/nginx/phpmyadmin.access.log;
-    error_log   /var/log/nginx/phpmyadmin.error.log;
-
-    location / {
-         root /usr/share/phpmyadmin;
-         index index.php;
-    }
-
-    location ~ \.php$ {
-        fastcgi_pass   127.0.0.1:9000;
-        fastcgi_index  index.php;
-        fastcgi_param  SCRIPT_FILENAME  /usr/share/phpmyadmin$fastcgi_script_name;
-        include fastcgi_params;
-    }
+	root         /usr/share/phpmyadmin/;
+	access_log   /var/log/nginx/phpmyadmin.access.log;
+	error_log    /var/log/nginx/phpmyadmin.error.log;
+	include      include/php/default_ssl;
 }

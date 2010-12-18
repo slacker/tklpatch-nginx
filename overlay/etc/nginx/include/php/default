@@ -1,0 +1,7 @@
+location ~* \.php$
+{
+	fastcgi_split_path_info  ^(.+\.php)(.*)$;
+	fastcgi_pass             php-fpm;
+	fastcgi_index            index.php;
+	include                  fastcgi_params;
+}

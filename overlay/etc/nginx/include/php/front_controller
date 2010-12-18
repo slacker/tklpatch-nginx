@@ -1,0 +1,20 @@
+##
+# Location blocks that work with Kohana 3.x and any other php site that
+# uses the index.php front controller.  Does not process any other php files.
+##
+
+location /
+{
+	# Check if file or directory is present. Rewrite all others to /index.php
+	try_files $uri $uri/ /index.php$request_uri;
+}
+
+location ^~ /index.php
+{
+	fastcgi_split_path_info  ^(\/index\.php)(.*)$;
+	fastcgi_pass             php-fpm;
+	fastcgi_index            index.php;
+	include                  fastcgi_params;
+	fastcgi_param            PATH_INFO $fastcgi_path_info;
+	fastcgi_param            PATH_TRANSLATED $document_root$fastcgi_path_info;
+}
