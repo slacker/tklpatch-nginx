@@ -5,5 +5,9 @@ server
 	root         /usr/share/phpmyadmin/;
 	access_log   /var/log/nginx/phpmyadmin.access.log;
 	error_log    /var/log/nginx/phpmyadmin.error.log;
-	include      include/php/default_ssl;
+
+	ssl on;
+	ssl_certificate     /etc/ssl/certs/cert.pem;
+	ssl_certificate_key /etc/ssl/certs/cert.pem;
+	include             include/php/default_ssl;
 }
