@@ -32,7 +32,7 @@ add-apt-repository ppa:nginx/stable
 add-apt-repository ppa:brianmercer/php
 
 # install packages
-install nginx php5-fpm php5-cgi php5-common php5-suhosin php-apc php5-mysql php5-memcached php5-curl php5-gd php5-mcrypt php-pear libssh2-php openssl ssl-cert libsasl2-modules mcrypt mysql-server mysql-client dbconfig-common memcached postfix webmin-postfix phpmyadmin webmin-mysql zlib1g-dev
+install nginx php5-fpm php5-cgi php5-common php5-suhosin php5-xcache php5-mysql php5-curl php5-gd php5-mcrypt php-pear libssh2-php openssl ssl-cert libsasl2-modules mcrypt mysql-server mysql-client dbconfig-common postfix webmin-postfix phpmyadmin webmin-mysql zlib1g-dev
 
 # enable phpmyadmin
 ln -s /etc/nginx/sites-available/phpmyadmin /etc/nginx/sites-enabled/phpmyadmin
